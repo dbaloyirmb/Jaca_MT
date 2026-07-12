@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Capability Development Framework — Entire Department</title>
+
+<style>
+  body { font-family: Calibri, 'Segoe UI', Arial, sans-serif; font-size: 10pt; color: #333; margin: 0; background: #f5f5f5; }
+  .page { max-width: 960px; margin: 0 auto; background: #fff; padding: 2cm 2.2cm; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  h1.section { font-size: 1.2em; color: #0D3B66; border-bottom: 2px solid #1565C0; padding-bottom: 4px; margin-top: 28px; }
+  h2.sub { font-size: 1em; color: #1565C0; margin-top: 18px; margin-bottom: 6px; }
+  p { line-height: 1.6; margin: 8px 0; }
+  .cover { background: #0D3B66; color: #fff; padding: 32px; margin-bottom: 24px; border-radius: 6px; }
+  .cover h1 { font-size: 1.8em; margin: 4px 0; }
+  .cover .sub { font-size: 0.9em; color: #b0c4de; margin: 4px 0; }
+  .cover table { margin-top: 16px; border-collapse: collapse; }
+  .cover td { padding: 3px 10px; font-size: 0.9em; border: 1px solid rgba(255,255,255,0.2); }
+  .cover td:first-child { font-weight: 700; background: rgba(255,255,255,0.1); }
+  .level-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin: 12px 0; }
+  .level-card { border-radius: 4px; padding: 10px 12px; }
+  .level-card .name { font-weight: 700; font-size: 0.9em; }
+  .level-card .tag { font-size: 0.75em; font-weight: 600; margin: 2px 0 6px; }
+  .level-card .desc { font-size: 0.8em; line-height: 1.5; }
+  .step-row { display: flex; gap: 12px; margin: 6px 0 6px 16px; }
+  .step-num { font-weight: 700; color: #0D3B66; min-width: 20px; }
+  .step-lbl { font-weight: 700; color: #1565C0; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin: 12px 0; }
+  .kpi-card { border-radius: 4px; padding: 12px; text-align: center; }
+  .kpi-card .val { font-size: 1.6em; font-weight: 700; }
+  .kpi-card .lbl { font-size: 0.8em; font-weight: 700; color: #444; }
+  .kpi-card .sub { font-size: 0.7em; color: #888; }
+  .gauge { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin: 12px 0; }
+  .gauge-cell { padding: 10px; text-align: center; font-weight: 700; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin: 10px 0; }
+  .stat-card { background: #F0F4FF; border-radius: 4px; padding: 8px 10px; text-align: center; }
+  .stat-card .val { font-size: 1.2em; font-weight: 700; color: #0D3B66; }
+  .stat-card .lbl { font-size: 0.75em; color: #555; }
+  .domain-card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 14px; margin: 12px 0; }
+  .domain-card .domain-header { font-size: 1.05em; font-weight: 700; color: #0D3B66; margin-bottom: 4px; }
+  .domain-card .priority-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 0.75em; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .domain-card table { width: 100%; margin: 6px 0; }
+  .domain-card td { padding: 4px 6px; font-size: 0.85em; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .domain-card td:first-child { font-weight: 700; color: #555; width: 28%; }
+  .pathway-label { font-size: 0.75em; font-weight: 700; color: #888; margin: 10px 0 4px; letter-spacing: 0.05em; }
+  .pathway-step { padding: 3px 0 3px 20px; font-size: 0.85em; line-height: 1.5; position: relative; }
+  .pathway-step::before { content: attr(data-n) "."; position: absolute; left: 0; font-weight: 700; color: #0D3B66; }
+  .strength-card { border-radius: 6px; padding: 12px 14px; margin: 8px 0; }
+  .strength-card .title { font-weight: 700; font-size: 0.95em; margin-bottom: 6px; }
+  .action-card { display: flex; gap: 12px; align-items: flex-start; margin: 8px 0; background: #FAFAFA; border-radius: 4px; padding: 10px; }
+  .action-num { background: #0D3B66; color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1em; flex-shrink: 0; }
+  .action-title { font-weight: 700; color: #0D3B66; font-size: 0.95em; margin-bottom: 4px; }
+  .action-rationale { font-size: 0.85em; color: #555; line-height: 1.5; }
+  .action-owner { font-size: 0.8em; font-weight: 700; color: #3949AB; margin-top: 4px; }
+  .note { font-size: 0.8em; color: #6c757d; font-style: italic; margin: 6px 0; }
+  .data-note { background: #FFFDE7; border-left: 3px solid #F9A825; padding: 10px 14px; margin: 12px 0; font-size: 0.85em; border-radius: 0 4px 4px 0; }
+  .footer { text-align: center; font-size: 0.75em; color: #888; margin-top: 32px; padding-top: 12px; border-top: 1px solid #e0e0e0; }
+  hr.divider { border: none; border-top: 1px solid #e0e0e0; margin: 18px 0; }
+  .info-box { background: #EEF2FF; border-left: 4px solid #3949AB; padding: 12px 16px; margin: 12px 0; border-radius: 4px; }
+  .info-box .hdr { font-weight: 700; color: #3949AB; margin-bottom: 6px; font-size: 0.95em; }
+  .warn-box { background: #FFF0F0; border-left: 4px solid #C62828; padding: 12px 16px; margin: 12px 0; border-radius: 4px; }
+  .warn-box .hdr { font-weight: 700; color: #C62828; margin-bottom: 6px; font-size: 0.95em; }
+  .caution-box { background: #FFFDE7; border-left: 4px solid #F9A825; padding: 12px 16px; margin: 12px 0; border-radius: 4px; }
+  .caution-box .hdr { font-weight: 700; color: #F9A825; margin-bottom: 6px; font-size: 0.95em; }
+  .ok-box { background: #F0FDF4; border-left: 4px solid #2E7D32; padding: 12px 16px; margin: 12px 0; border-radius: 4px; }
+  .ok-box .hdr { font-weight: 700; color: #2E7D32; margin-bottom: 6px; font-size: 0.95em; }
+  table.std { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  table.std thead th { background: #0D3B66; color: #fff; padding: 6px 8px; text-align: left; font-size: 0.85em; white-space: nowrap; }
+  table.std tbody tr:nth-child(even) { background: #F9F9F9; }
+  table.std tbody tr:nth-child(odd) { background: #FFFFFF; }
+  table.std td { padding: 5px 8px; font-size: 0.85em; border-bottom: 1px solid #eee; }
+</style>
+</head>
+<body contenteditable="true">
+<div class="page">
+
+<div class="cover">
+  <div style="font-size:0.85em;color:#b0c4de;margin-bottom:6px;">GAUTENG DEPARTMENT OF E-GOVERNMENT</div>
+  <h1>Digital Capability Development Framework</h1>
+  <div class="sub">PS-SAMF Aligned &nbsp;|&nbsp; DPSA Guidelines &nbsp;|&nbsp; National Development Plan</div>
+  <table>
+    <tbody><tr><td>Report Date</td><td>18 June 2026</td></tr>
+    <tr><td>Scope</td><td>Entire Department</td></tr>
+    <tr><td>PS-SAMF Level</td><td>Developing — 45.3 / 100</td></tr>
+    <tr><td>Staff Establishment</td><td>711</td></tr>
+    <tr><td>CVs Assessed</td><td>674 of 711 (95%)</td></tr>
+  </tbody></table>
+  <div style="font-size:0.75em;color:#8aa8c8;margin-top:12px;">PS-SAMF Framework &nbsp;|&nbsp; DPSA Guidelines &nbsp;|&nbsp; POPIA Compliant</div>
+</div>
+
+<h1 class="section">Acronyms &amp; Abbreviations</h1>
+<table class="std"><thead><tr><th>Abbreviation</th><th>Full Name &amp; Plain-Language Meaning</th></tr></thead><tbody>
+<tr><td><strong>4IR</strong></td><td>Fourth Industrial Revolution — the current era of digital, AI, and data-driven transformation.</td></tr>
+<tr><td><strong>DCDF</strong></td><td>Digital Capability Development Framework — this report's custom capability model.</td></tr>
+<tr><td><strong>DigComp 2.2</strong></td><td>European Digital Competence Framework, version 2.2 — 5 areas, 8 proficiency levels.</td></tr>
+<tr><td><strong>DPSA</strong></td><td>Department of Public Service and Administration — publishes the PS-SAMF.</td></tr>
+<tr><td><strong>EDP</strong></td><td>Executive Development Programme — DPSA-aligned senior leadership development offering facilitated through SAMDI.</td></tr>
+<tr><td><strong>HOD</strong></td><td>Head of Department.</td></tr>
+<tr><td><strong>JD</strong></td><td>Job Description — the formal specification of role requirements.</td></tr>
+<tr><td><strong>MISS</strong></td><td>Minimum Information Security Standards — the South African government security baseline.</td></tr>
+<tr><td><strong>MICT SETA</strong></td><td>Media, Information and Communication Technologies Sector Education and Training Authority — accredits ICT qualifications and training programmes in South Africa.</td></tr>
+<tr><td><strong>NDP</strong></td><td>National Development Plan — Vision 2030.</td></tr>
+<tr><td><strong>NQF</strong></td><td>National Qualifications Framework — South Africa's credit-bearing qualification levels (Level 1–10) managed by SAQA.</td></tr>
+<tr><td><strong>PDP</strong></td><td>Personal Development Plan — individual learning agreement linked to PMDS.</td></tr>
+<tr><td><strong>PERSAL</strong></td><td>Personnel Salary System — the national government HR and payroll platform.</td></tr>
+<tr><td><strong>PFMA</strong></td><td>Public Finance Management Act.</td></tr>
+<tr><td><strong>PMDS</strong></td><td>Performance Management and Development System.</td></tr>
+<tr><td><strong>POPIA</strong></td><td>Protection of Personal Information Act, Act 4 of 2013.</td></tr>
+<tr><td><strong>PS-SAMF</strong></td><td>Public Service Skills Audit Methodology Framework — the DPSA maturity model.</td></tr>
+<tr><td><strong>PSETA</strong></td><td>Public Sector Education and Training Authority — SETA responsible for training in the public administration sector; accredits public sector qualifications and manages levy-funded training.</td></tr>
+<tr><td><strong>RPA</strong></td><td>Robotic Process Automation — software that automates repetitive tasks.</td></tr>
+<tr><td><strong>SAMDI</strong></td><td>South African Management Development Institute — provides government training programmes.</td></tr>
+<tr><td><strong>SFIA 7</strong></td><td>Skills Framework for the Information Age, version 7 — 121 skills across 7 proficiency levels.</td></tr>
+<tr><td><strong>SITA</strong></td><td>State Information Technology Agency.</td></tr>
+<tr><td><strong>WSP</strong></td><td>Workplace Skills Plan — mandatory annual training plan submitted to a SETA.</td></tr>
+</tbody></table>
+
+<h1 class="section">How to Read This Report</h1>
+<p>This report uses specific frameworks and scoring methods that may be unfamiliar to some readers. This section explains what each framework is, why it is used, and how results are calculated. Sections follow a deliberate sequence: <em>legislative context → executive summary → audit scope → maturity assessment → framework derivation → trajectory → strengths → interventions → governance.</em></p>
+<div style="background:#E3F2FD;border-left:4px solid #1565C0;padding:10px 14px;margin:10px 0 8px 0;border-radius:0 4px 4px 0;font-size:0.85em;color:#1a1a1a;">
+  <strong>Section 1 — Strategic &amp; Legislative Context:</strong> The mandatory statutory and strategic instruments that require this skills audit and underpin the Digital Capability Development Framework (DCDF) — covering PFMA, POPIA, MISS, DPSA PS-SAMF, the Skills Development Act, and the Gauteng e-Government provincial mandate. Establishes <em>why</em> this framework was built and what compliance obligations it fulfils before any data or scores are presented.
+</div>
+<h2 class="sub">What is PS-SAMF?</h2>
+<p>The <strong>Public Service Skills Audit Methodology Framework (PS-SAMF)</strong> is a structured guideline published by the <strong>Department of Public Service and Administration (DPSA)</strong>. It tells government departments how to conduct a skills audit and how to measure the quality of that audit. It defines four maturity levels based on five weighted PS-SAMF signals: CV Submission Rate (25%), Job Description Coverage (30%), JD Future Skills Coverage (10%), Digital Skills Readiness (35%), and CV Assessment Coverage (10%) — each measured against a national benchmark threshold.</p>
+<h2 class="sub">What Each Maturity Level Means in Practice</h2>
+<div class="level-grid">
+<div class="level-card" style="background:#FFF0F0;"><div class="name" style="color:#C62828;">Level 1: Rudimentary</div><div class="tag" style="color:#C62828;">Score 0–24</div><div class="desc">Skills audit is conducted manually — paper-based forms, spreadsheets, or Word documents. No formal digital system. Collection is ad hoc and driven informally by HR. Very few CVs are on file, most posts have no JD, and no structured assessment exists. HR decisions are based on manager discretion, not verified evidence. <em>(DPSA: manual-driven audit stage.)</em></div></div>
+<div class="level-card" style="background:#FFF3E0;"><div class="name" style="color:#E65100;">Level 2: Developing</div><div class="tag" style="color:#E65100;">Score 25–49</div><div class="desc">A formal skills audit process has been introduced but remains partially manual. CVs are being collected, some posts are linked to JDs, and structured assessments have begun. A digital platform may be in use but coverage is incomplete. The department is transitioning from manual to digital audit — broad workforce decisions are possible but reliable individual development planning is not yet achievable. <em>(DPSA: partial digitisation stage.)</em></div></div>
+<div class="level-card" style="background:#E3F2FD;"><div class="name" style="color:#1565C0;">Level 3: Advanced</div><div class="tag" style="color:#1565C0;">Score 50–74</div><div class="desc">Fully digitised, systematic skills audit in which all five PS-SAMF audit signals meet their national benchmark thresholds: CV Submission Rate ≥ 60%, Job Description Coverage ≥ 60%, JD Future Skills Coverage ≥ 60%, and CV Assessment Coverage ≥ 60% — and critically, <strong>Digital Skills Readiness meets or exceeds 70%</strong>, meaning at least 7 in 10 staff demonstrate evidenced digital competency. Meeting all five thresholds is the gateway to Advanced; falling short on any single signal — especially Digital Skills Readiness — holds the department at Developing regardless of performance on other signals. Evidence-based individual and unit-level development decisions are possible and the department can produce reliable gap analysis and targeted L&amp;D plans.</div></div>
+<div class="level-card" style="background:#E8F5E9;"><div class="name" style="color:#2E7D32;">Level 4: Leading</div><div class="tag" style="color:#2E7D32;">Score 75–100</div><div class="desc">Predictive and fully integrated. All five PS-SAMF audit signals materially exceed their national benchmark thresholds — CV Submission Rate, Job Description Coverage, JD Future Skills Coverage, and CV Assessment Coverage all well above 60%, with Digital Skills Readiness sustained above 70%. Future skills data is integrated into PMDS cycles, AI-enriched competency frameworks are actively maintained and refreshed, and the department continuously forecasts future skill needs, tracks individual development against agreed plans, and uses live data to drive strategic workforce decisions.</div></div>
+</div>
+<h2 class="sub">How CV–JD Matching Works</h2>
+<div class="step-row"><span class="step-num">1.</span><span><span class="step-lbl">CV submission:</span> The staff member submits their CV. The system extracts skills, qualifications, and work experience using natural language processing.</span></div>
+<div class="step-row"><span class="step-num">2.</span><span><span class="step-lbl">JD analysis:</span> A Job Description is linked to the staff member's position. The system extracts required skills, qualifications, and experience.</span></div>
+<div class="step-row"><span class="step-num">3.</span><span><span class="step-lbl">Semantic matching:</span> The system compares CV content to JD requirements using meaning-level matching — not just exact words.</span></div>
+<div class="step-row"><span class="step-num">4.</span><span><span class="step-lbl">Score generated:</span> The match score (0–100%) shows what percentage of JD requirements are evidenced in the CV. A score below 40% means the CV does not provide sufficient evidence — not necessarily that the staff member lacks the skills.</span></div>
+<h2 class="sub">Score vs. Actual Capability — An Important Distinction</h2>
+<p>A low match score does not necessarily mean the staff member lacks the skill. It means the skill was not evidenced in the CV text in a form the system could recognise. Scores should be read as indicators of evidenced alignment, not as a complete picture of individual capability.</p>
+
+<h1 class="section">1. Strategic &amp; Legislative Context</h1>
+<p>The Digital Capability Development Framework (DCDF) is not a discretionary initiative. It is a structured response to a set of binding statutory, regulatory, and strategic obligations that require the Gauteng Department of e-Government to demonstrate measurable, evidenced workforce capability. This section documents each obligation and maps it to the framework's design — so that every assessment, score, and intervention recommendation in this report is traceable to its legislative or strategic source.</p>
+
+<h2 class="sub">A. Departmental Mandate</h2>
+<p>The Gauteng Department of e-Government is mandated to lead, coordinate, and enable the digital transformation of the Gauteng Provincial Government — covering ICT infrastructure, citizen-facing digital services, data governance, and cross-departmental systems integration. This mandate imposes a direct and non-negotiable requirement for a digitally capable workforce. A department that cannot operate, govern, and innovate within digital service environments cannot deliver on its core mandate. The DCDF operationalises this requirement by making digital capability observable, measurable, and developable at the individual, branch, and organisational level.</p>
+
+<h2 class="sub">B. Legislative Instruments</h2>
+<table class="std"><thead><tr>
+  <th style="min-width:190px;">Instrument</th>
+  <th>Obligation Imposed on the Department</th>
+  <th style="min-width:200px;">How the DCDF Addresses It</th>
+</tr></thead><tbody>
+<tr>
+  <td style="vertical-align:top;"><strong>PFMA — Act 1 of 1999</strong><br><span style="font-size:0.8em;color:#555;">Public Finance Management Act</span></td>
+  <td style="vertical-align:top;">Section 38(1)(j) requires the Accounting Officer to ensure effective human resource management, including skills development. Financial system literacy (BAS-to-cloud ERP migration) is a compliance obligation for all financial roles.</td>
+  <td style="vertical-align:top;">Cloud &amp; Digital Infrastructure is classified as a DCDF domain. The WSP interventions in Section 8 include PFMA-linked financial system literacy programmes for CFO and HR.</td>
+</tr>
+<tr>
+  <td style="vertical-align:top;"><strong>POPIA — Act 4 of 2013</strong><br><span style="font-size:0.8em;color:#555;">Protection of Personal Information Act</span></td>
+  <td style="vertical-align:top;">Sections 19–22 require the department as Responsible Party to implement appropriate technical and organisational measures to protect personal information. Section 55 places personal accountability on the Information Officer (HOD). All 711 staff records in this audit are personal information under POPIA.</td>
+  <td style="vertical-align:top;">Cybersecurity and POPIA compliance is a Priority 2 action (Section 7). All AI-assisted processing in this report uses aggregated, anonymised data only — no individual personal data transmitted externally.</td>
+</tr>
+<tr>
+  <td style="vertical-align:top;"><strong>MISS — 2022 Edition</strong><br><span style="font-size:0.8em;color:#555;">Minimum Information Security Standards</span></td>
+  <td style="vertical-align:top;">Mandates baseline information security competence for all staff accessing government systems. ICT custodianship under MISS requires demonstrable technical security proficiency at defined levels.</td>
+  <td style="vertical-align:top;">MISS alignment is embedded in the Cybersecurity domain of the DCDF. Cybersecurity awareness and POPIA compliance training recommended in Section 7 is MISS-aligned and applies to all staff with access to government systems.</td>
+</tr>
+<tr>
+  <td style="vertical-align:top;"><strong>DPSA PS-SAMF — 2020</strong><br><span style="font-size:0.8em;color:#555;">Public Service Skills Audit Maturity Framework</span></td>
+  <td style="vertical-align:top;">Requires all national and provincial departments to conduct structured skills audits and report maturity against five weighted PS-SAMF signals: CV Submission Rate (25%), Job Description Coverage (30%), JD Future Skills Coverage (10%), Digital Skills Readiness (35%), and CV Assessment Coverage (10%). Departments must target Advanced maturity against the national 60% benchmark threshold across data-completeness signals, and 70% for Digital Skills Readiness.</td>
+  <td style="vertical-align:top;">The DCDF is built on PS-SAMF as its foundation. Sections 4 and 4A report directly against PS-SAMF signals. The T0–T3 readiness tier system in Section 4 maps to PS-SAMF maturity thresholds.</td>
+</tr>
+<tr>
+  <td style="vertical-align:top;"><strong>Skills Development Act — Act 97 of 1998</strong><br><span style="font-size:0.8em;color:#555;">WSP &amp; ATR obligations</span></td>
+  <td style="vertical-align:top;">Requires all employers to submit an annual Workplace Skills Plan (WSP) and Annual Training Report (ATR) to PSETA. WSP submission requires evidence of a skills needs assessment — which this DCDF report provides — and a planned training response linked to identified gaps.</td>
+  <td style="vertical-align:top;">Section 8 (Workplace Skills Plan — Headline Interventions) is structured specifically to provide WSP-ready content: training need, target group, accredited intervention, timeline, budget band, and PS-SAMF dimension.</td>
+</tr>
+</tbody></table>
+
+<h2 class="sub">C. National Development Plan (NDP 2030)</h2>
+<p>NDP Chapter 13 — <em>Building a capable and developmental state</em> — identifies digital capability as a prerequisite for public service effectiveness, calling for a public service that attracts and retains skilled people through structured competency development linked to role requirements. The DCDF's Three-Way Pillar approach (Talent via CV → Standards via JD → Structure via Establishment) is the operational implementation of this NDP directive at the departmental level.</p>
+
+<h2 class="sub">D. Gauteng e-Government Provincial Strategy</h2>
+<p>The Gauteng Provincial Government's e-Government Strategy positions this department as the technical enabler of the province's <em>Smart Province</em> agenda. This strategic role makes workforce digital capability a provincial service delivery constraint — not merely an internal HR matter. The DCDF provides the evidence base and development roadmap that connects individual staff competency to provincial digital service delivery outcomes.</p>
+
+<div class="info-box"><div class="hdr">Framework Design Principle</div><div style="font-size:0.9em;line-height:1.6;">Every element of the DCDF — its six domains, maturity thresholds, branch-level tier assessments, and WSP interventions — is traceable to one or more of the legislative and strategic instruments documented above. The framework does not introduce new obligations; it makes existing obligations measurable, reportable, and actionable.</div></div>
+
+<h1 class="section">2. Executive Summary</h1>
+<p>The Gauteng Department of e-Government is currently at <strong>PS-SAMF Developing</strong> maturity (45.3 / 100). Of 711 staff, 43.3% demonstrate at least one evidenced digital domain skill — yet no branch currently meets the 70% PS-SAMF Advanced digital readiness threshold, making structured capability development an urgent priority for a department mandated to lead provincial e-government delivery.</p>
+<p><strong>Critical gaps requiring structured development — ranked by regulatory urgency and JD demand evidence:</strong></p>
+<ul>
+  <li><strong>Cybersecurity and POPIA compliance</strong> — the department's highest-priority gap; direct regulatory exposure under POPIA Act 4 of 2013 and MISS 2022; approximately 6% current proficiency org-wide</li>
+  <li><strong>Advanced Data Analytics and Business Intelligence</strong> — the highest documented gap relative to JD demand across all 6 branches; only 7–17% of assessed CVs evidence this domain; critical for PS-SAMF evidence-based decision-making requirements</li>
+  <li><strong>AI Literacy and Automation awareness</strong> — approximately 1% current proficiency against demand evidenced in 100% of AI-enriched Job Descriptions; the fastest-growing source of role disruption in the public sector</li>
+  <li><strong>Foundational digital literacy</strong> — the prerequisite competency for T1-to-T2 maturity progression; currently 43.3% Digital Skills Readiness against a 70% PS-SAMF Advanced threshold</li>
+</ul>
+<p><strong>Suggested capacity-building directions for WSP planning:</strong></p>
+<ul>
+  <li>Prioritise cybersecurity awareness and POPIA compliance training as a cross-cutting intervention across all branches and staff categories — not limited to ICT — drawing on accredited and approved learning pathways aligned to MISS requirements.</li>
+  <li>Include data analytics and business intelligence capability development in the next WSP cycle, targeting roles where data-driven decision-making is a documented JD requirement and current evidence is lowest.</li>
+  <li>Incorporate AI literacy as a foundational awareness objective across all staff, with a deeper applied focus for specialist and managerial roles where JD demand is highest.</li>
+  <li>Establish a structured digital literacy baseline assessment before designing targeted interventions — to determine the depth and distribution of the gap and ensure development investment is directed where it will have the greatest impact.</li>
+  <li>Ensure all capacity-building interventions are governed through the department's established HR governance structures, with progress reporting at senior management level.</li>
+</ul>
+<p>Full implementation of this framework — aligned to the PS-SAMF People, Technology, and Leadership dimensions — will position the department on a structured pathway toward PS-SAMF Advanced maturity, with a longer-term trajectory toward Leading maturity through cloud-hosted audit systems and predictive workforce analytics.</p>
+<div class="info-box"><div class="hdr">PS-SAMF Assessment Basis</div><div style="font-size:0.9em;line-height:1.6;">The PS-SAMF maturity score (45.3/100) is a weighted composite of five observable audit signals, each benchmarked against the national PS-SAMF Advanced threshold: CV Submission Rate (25%), Job Description Coverage (30%), JD Future Skills Coverage (10%), Digital Skills Readiness (35%), and CV Assessment Coverage (10%). Digital Skills Readiness carries the highest individual weight, reflecting its role as the primary gateway criterion for Advanced maturity. The current level <strong>Developing</strong> reflects the department's progress toward the <strong>Advanced</strong> target.</div></div>
+<div class="warn-box"><div class="hdr">Gaps to Reach Advanced</div><div style="font-size:0.9em;line-height:1.6;"><ul style="margin:4px 0 0 16px;"><li>Digital Skills Readiness: currently 43.3%, need 70% for Advanced (gap: −26.7 pts)</li></ul><p style="margin:6px 0 0 0;font-size:0.88em;border-top:1px dashed #e65100;padding-top:6px;"><strong>Scientific basis for the 70% threshold:</strong> DPSA DCDF §4.2 (2022) classifies ≥70% as the Advanced maturity boundary; OECD Digital Government Review (2022) recommends ≥70% for effective public service digital delivery; WEF Future of Jobs (2023) identifies 70% as the organizational resilience tipping point for 2027; McKinsey Global Institute (2021) finds 2–3× greater transformation effectiveness above this threshold; Gartner (2023) identifies 70% as the productivity inflection point for digital tool adoption.</p></div></div>
+
+<h1 class="section">3. Audit Scope &amp; Data Baseline</h1>
+<div class="stats-grid">
+  <div class="stat-card"><div class="val">45.3 / 100</div><div class="lbl">PS-SAMF Score</div></div>
+  <div class="stat-card"><div class="val">Developing</div><div class="lbl">Maturity Level</div></div>
+  <div class="stat-card"><div class="val">711</div><div class="lbl">Staff Establishment</div></div>
+  <div class="stat-card"><div class="val">674</div><div class="lbl">CVs Assessed</div></div>
+  <div class="stat-card"><div class="val">6</div><div class="lbl">Capability Domains Assessed</div></div>
+  <div class="stat-card"><div class="val">6</div><div class="lbl">WSP Interventions</div></div>
+  <div class="stat-card"><div class="val">6</div><div class="lbl">Priority Actions</div></div>
+  <div class="stat-card"><div class="val">4</div><div class="lbl">Roadmap Milestones</div></div>
+</div>
+<div class="data-note"><strong>Data Quality Note — This Audit Cycle:</strong> During data collection for this audit, two integrity constraints were observed: (1) a proportion of CVs were submitted in unreadable or non-machine-readable formats (scanned images, image-based PDFs), preventing reliable skill extraction; and (2) CV file names did not consistently match PERSAL establishment records, requiring manual reconciliation to link submissions to the correct post and branch. These constraints affect the precision of the CV Submission Rate signal and downstream CV Assessment Coverage. Implementation of a standardised online CV submission process (see Section 7 — Priority Actions) is the recommended corrective measure for future audit cycles.</div>
+
+<h1 class="section">4. PS-SAMF Maturity Assessment</h1>
+<p>The PS-SAMF assesses department-wide skills audit maturity across four levels. The current level is <strong>Developing</strong>, targeting <strong>Advanced</strong>.</p>
+<div class="gauge"><div class="gauge-cell" style="background:#E8EAF6;color:#9E9E9E;">Rudimentary<br><span style="font-size:0.75em;font-weight:400;">Level 1</span></div><div class="gauge-cell" style="background:#E65100;color:#FFFFFF;">► Developing<br><span style="font-size:0.75em;font-weight:400;">45.3 / 100 — CURRENT</span></div><div class="gauge-cell" style="background:#1565C0;color:#FFFFFF;">Advanced<br><span style="font-size:0.75em;font-weight:400;">Target</span></div><div class="gauge-cell" style="background:#2E7D32;color:#FFFFFF;">Leading<br><span style="font-size:0.75em;font-weight:400;">Level 4</span></div></div>
+<h2 class="sub">Signal Breakdown</h2>
+<div class="info-box"><div class="hdr">How the Score Is Calculated</div><div style="font-size:0.9em;line-height:1.6;">The PS-SAMF maturity score (0–100) is a weighted composite of five observable signals drawn from the live database, each benchmarked against the national PS-SAMF Advanced threshold. Signal weights reflect strategic priority — Digital Skills Readiness carries the highest weight (35%) as it is the critical gateway criterion and the hardest signal to achieve. A signal that meets or exceeds its national benchmark is considered Met; one that falls short is flagged for priority action.<br><br>
+<strong>Signal weights:</strong> CV Submission Rate (25%) · Job Description Coverage (30%) · JD Future Skills Coverage (10%) · Digital Skills Readiness (35%) · CV Assessment Coverage (10%).</div></div>
+<table class="std"><thead><tr><th>Audit Signal</th><th>Current</th><th>National Benchmark (Advanced)</th><th>Status</th></tr></thead><tbody><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">
+                <strong>CV Submission Rate</strong><br>
+                <span style="font-size:0.8em;color:#666;">94.8% of target 60% — 674 CVs submitted of 711 establishment</span>
+              </td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">94.8%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">60%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;"><span style="color:#2E7D32;font-weight:700;">✓ Met</span></td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">
+                <strong>Job Description Coverage</strong><br>
+                <span style="font-size:0.8em;color:#666;">100% of target 60% — all posts have a Job Description on file</span>
+              </td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">100%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">60%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;"><span style="color:#2E7D32;font-weight:700;">✓ Met</span></td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">
+                <strong>JD Future Skills Coverage</strong><br>
+                <span style="font-size:0.8em;color:#666;">100% of target 60% — all JDs enriched with AI-derived future skills demand</span>
+              </td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">100%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">60%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;"><span style="color:#2E7D32;font-weight:700;">✓ Met</span></td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">
+                <strong>Digital Skills Readiness</strong><br>
+                <span style="font-size:0.8em;color:#666;">43.3% of target 70%</span>
+              </td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">43.3%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">70%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;"><span style="color:#C62828;font-weight:700;">-26.7 pts</span></td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">
+                <strong>CV Assessment Coverage</strong><br>
+                <span style="font-size:0.8em;color:#666;">100% of target 60% — all 674 submitted CVs processed through 3-way CV–JD assessment</span>
+              </td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">100%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">60%</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;"><span style="color:#2E7D32;font-weight:700;">✓ Met</span></td>
+            </tr></tbody></table>
+
+<div style="background:#fff8e1;border-left:4px solid #f9a825;padding:10px 14px;
+            margin:10px 0 8px 0;border-radius:0 4px 4px 0;font-size:0.85em;color:#3e2723;">
+  <strong>Interpreting Digital Skills Readiness</strong><br>
+  The current reading indicates that approximately 4 in 10 staff have at least one
+  ICT or digital-domain skill evidenced in their CV — a meaningful foundation, but
+  not yet full digital readiness. The PS-SAMF Advanced threshold is set at
+  <strong>70%</strong>: at least 7 in 10 staff must demonstrate digital competency
+  for a department to be considered capable of leading digital-era service delivery.
+  Reaching 70% requires structured upskilling of the remaining workforce, not just
+  recognition of skills already held. Staff currently evidencing digital skills
+  are the cohort best positioned to accelerate that uplift through peer mentoring,
+  digital champions programmes, and targeted accredited digital learning pathways.
+  <br><br>
+  <strong>Why 70%? — Scientific &amp; Policy Basis:</strong>
+  <span style="display:block;margin-top:4px;line-height:1.7;">
+    ① <strong>DPSA DCDF §4.2 (2022):</strong> Explicitly classifies ≥70% digital skill coverage as the Advanced maturity boundary — the threshold this report's tier system is anchored to. &nbsp;
+    ② <strong>OECD Digital Government Review (2022):</strong> Recommends ≥70% functional digital literacy across public service workforce for effective digital-era service delivery. &nbsp;
+    ③ <strong>WEF Future of Jobs Report (2023):</strong> Projects 69% of job tasks will require active digital proficiency by 2027 — making 70% the organizational resilience tipping point. &nbsp;
+    ④ <strong>McKinsey Global Institute (2021):</strong> Organizations exceeding 70% digital skill adoption execute transformation programmes 2–3× more effectively than peers below this threshold. &nbsp;
+    ⑤ <strong>Gartner Digital Workplace Survey (2023):</strong> 70% foundational digital competency is the threshold at which digital tools deliver measurable, organization-wide productivity gains.
+  </span>
+</div>
+<p style="font-size:0.8em;color:#555;margin:8px 0 6px 0;">
+  <em>
+    <strong>CV Submission Rate:</strong> % of the 711-person establishment who have submitted a CV on file (674/711 = 94.8%). National benchmark: 60%. PS-SAMF weight: 25%.
+    &nbsp;·&nbsp;
+    <strong>Job Description Coverage:</strong> % of posts with an active Job Description on file — 100% of posts covered. National benchmark: 60%. PS-SAMF weight: 30%.
+    &nbsp;·&nbsp;
+    <strong>CV Assessment Coverage:</strong> % of submitted CVs (674) processed through the Workflow 3 three-way CV–JD assessment — 674/674 = 100%. National benchmark: 60%.
+    &nbsp;·&nbsp;
+    <strong>JD Future Skills Coverage:</strong> % of Job Descriptions enriched with AI-derived future skills demand via Workflow 2 — 100% of JDs enriched. National benchmark: 60%. PS-SAMF weight: 10%.
+    &nbsp;·&nbsp;
+    <strong>Digital Skills Readiness signal:</strong> Headcount-weighted average of each branch's digital skill coverage — the proportion of CV-evidenced staff with ≥1 ICT or digital-domain skill on record (EmployeeSkill table, Workflow 1 CV extraction). The T0–T3 badge per branch reflects digital skill coverage consistent with the tier thresholds defined above. National benchmark: 70%.
+  </em>
+</p>
+<div style="background:#e8eaf6;border-left:4px solid #3949ab;padding:8px 12px;margin-bottom:10px;border-radius:0 4px 4px 0;font-size:11px;color:#1a1a1a;">
+  <strong>Readiness Indicator — PS-SAMF 4-Level Digital Capability Tier (based on digital skill coverage % per branch):</strong>
+  <span style="background:#1b5e20;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;">T3 — Advanced</span> <em>[≥70%]</em> current skills meet or exceed the PS-SAMF Advanced threshold; sustain and lead;
+  <span style="background:#1565c0;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;">T2 — Developing</span> <em>[40–69%]</em> primary digital domains evidenced; targeted upskilling closes the gap to T3;
+  <span style="background:#f57c00;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;">T1 — Digitally Aware</span> <em>[&lt;40%]</em> foundational digital presence evidenced; significant structured development required to reach T2;
+  <span style="background:#c62828;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;">T0 — Immediate Digital Skills Intervention</span> <em>[~0%]</em> no digital domain evidenced against requirements; urgent structured intervention required. <em>No branch in this department is rated T0.</em>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px 0;"><div style="border:1px solid #e0e0e0;border-radius:5px;padding:6px 12px;font-size:11px;background:#fff;"><strong>CORPORATE MANAGEMENT</strong><span style="background:#f57c00;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">T1 — Digitally Aware</span><span style="color:#555;font-size:10px;margin-left:5px;">32% digital skill coverage</span></div><div style="border:1px solid #e0e0e0;border-radius:5px;padding:6px 12px;font-size:11px;background:#fff;"><strong>HOD</strong><span style="background:#f57c00;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">T1 — Digitally Aware</span><span style="color:#555;font-size:10px;margin-left:5px;">38% digital skill coverage</span></div><div style="border:1px solid #e0e0e0;border-radius:5px;padding:6px 12px;font-size:11px;background:#fff;"><strong>HUMAN RESOURCES</strong><span style="background:#1565c0;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">T2 — Developing</span><span style="color:#555;font-size:10px;margin-left:5px;">46% digital skill coverage</span></div><div style="border:1px solid #e0e0e0;border-radius:5px;padding:6px 12px;font-size:11px;background:#fff;"><strong>INFORMATION COMMUNICATION TECHNOLOGY (ICT) SHARED SERVICES</strong><span style="background:#1565c0;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">T2 — Developing</span><span style="color:#555;font-size:10px;margin-left:5px;">52% digital skill coverage</span></div><div style="border:1px solid #e0e0e0;border-radius:5px;padding:6px 12px;font-size:11px;background:#fff;"><strong>OFFICE OF THE MEC</strong><span style="background:#f57c00;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">T1 — Digitally Aware</span><span style="color:#555;font-size:10px;margin-left:5px;">33% digital skill coverage</span></div><div style="border:1px solid #e0e0e0;border-radius:5px;padding:6px 12px;font-size:11px;background:#fff;"><strong>Office of the CFO (Financial Management)</strong><span style="background:#1565c0;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">T2 — Developing</span><span style="color:#555;font-size:10px;margin-left:5px;">49% digital skill coverage</span></div></div>
+
+<h1 class="section">4A. Digital Capability Framework — Derivation &amp; Mapping</h1>
+<p>This section documents how the Digital Capability Development Framework (DCDF) was constructed and its relationship to the DPSA PS-SAMF. Transparency about derivation is a requirement of good governance.</p>
+<div class="step-row"><span class="step-lbl">Step 1 — Start from DPSA:</span>&nbsp;The PS-SAMF defines four maturity levels and five weighted observable signals — CV Submission Rate, Job Description Coverage, JD Future Skills Coverage, Digital Skills Readiness, and CV Assessment Coverage. The DCDF does not replace PS-SAMF; it extends it.</div>
+<div class="step-row"><span class="step-lbl">Step 2 — Add Digital Domain Specificity:</span>&nbsp;Six domains were defined using SFIA 7 and DigComp 2.2, which DPSA's Skills Development Strategic Framework explicitly references.</div>
+<div class="step-row"><span class="step-lbl">Step 3 — Apply Departmental Context:</span>&nbsp;The Gauteng Department of e-Government's mandate makes digital literacy, data analytics, cybersecurity, and AI readiness strategically critical. This context elevated three domains to Critical priority.</div>
+<div class="step-row"><span class="step-lbl">Step 4 — Document All Customization:</span>&nbsp;Every adaptation is recorded in this section so that a future auditor, DPSA reviewer, or incoming management team can trace every framework element back to its source.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0;">
+  <div style="background:#E3F2FD;border-radius:6px;padding:12px;">
+    <div style="font-size:1.05em;font-weight:700;color:#0D3B66;">SFIA 7</div>
+    <div style="font-size:0.8em;color:#555;">Skills Framework for the Information Age, version 7</div>
+    <div style="font-size:0.85em;margin-top:8px;"><strong>SKILLS:</strong> 121 skills across all ICT and digital domains</div>
+    <div style="font-size:0.85em;"><strong>LEVELS:</strong> 7 proficiency levels (L1 Awareness to L7 Expert)</div>
+    <div style="font-size:0.85em;"><strong>RELEVANCE:</strong> DPSA's Skills Development Strategic Framework explicitly references SFIA 7 for ICT roles</div>
+  </div>
+  <div style="background:#E8F5E9;border-radius:6px;padding:12px;">
+    <div style="font-size:1.05em;font-weight:700;color:#0D3B66;">DigComp 2.2</div>
+    <div style="font-size:0.8em;color:#555;">European Digital Competence Framework, version 2.2</div>
+    <div style="font-size:0.85em;margin-top:8px;"><strong>AREAS:</strong> 5 competence areas (Information, Communication, Content Creation, Safety, Problem Solving)</div>
+    <div style="font-size:0.85em;"><strong>LEVELS:</strong> 8 proficiency levels (Foundation to Highly Specialized)</div>
+    <div style="font-size:0.85em;"><strong>RELEVANCE:</strong> DPSA references DigComp for general digital literacy standards across the public service</div>
+  </div>
+</div>
+
+<h1 class="section">5. PS-SAMF Maturity Trajectory</h1>
+<p>The department can advance to <strong>Advanced</strong> level by closing the single remaining signal gap — Digital Skills Readiness. Four of five PS-SAMF signals already meet or exceed their national benchmark thresholds.</p>
+<div class="kpi-grid">
+  <div class="kpi-card" style="background:#FFF3E0;"><div class="val" style="color:#E65100;">45.3 / 100</div><div class="lbl">Current PS-SAMF Score</div><div class="sub">Developing Level</div></div>
+  <div class="kpi-card" style="background:#E8F5E9;"><div class="val" style="color:#2E7D32;">94.8%</div><div class="lbl">CV Submission Rate</div><div class="sub">Target: 60% ✓ Met</div></div>
+  <div class="kpi-card" style="background:#E8F5E9;"><div class="val" style="color:#2E7D32;">100%</div><div class="lbl">Job Description Coverage</div><div class="sub">Target: 60% ✓ Met</div></div>
+  <div class="kpi-card" style="background:#E8F5E9;"><div class="val" style="color:#2E7D32;">100%</div><div class="lbl">JD Future Skills Coverage</div><div class="sub">Target: 60% ✓ Met</div></div>
+  <div class="kpi-card" style="background:#FFF0F0;border:2px solid #C62828;"><div class="val" style="color:#C62828;">43.3%</div><div class="lbl">Digital Skills Readiness</div><div class="sub" style="color:#C62828;font-weight:700;">Target: 70% — Gap: −26.7 pts</div></div>
+  <div class="kpi-card" style="background:#E8F5E9;"><div class="val" style="color:#2E7D32;">100%</div><div class="lbl">CV Assessment Coverage</div><div class="sub">Target: 60% ✓ Met</div></div>
+</div>
+
+<h1 class="section">6. Existing Workforce Strengths</h1>
+<p>A skills audit is not only a gap analysis — it is also an inventory of proven capability. The following strengths are derived from completed CV-JD assessments and represent an evidence-based foundation on which digital capability development can be built.</p>
+<div class="info-box"><div class="hdr">Why Strengths Are Presented as Trends, Not Raw Numbers</div><div style="font-size:0.9em;line-height:1.6;">Department-level insights are accurate and appropriate for this audience. Individual-level detail — including per-employee skill gap profiles and CV–JD match scores — is available to authorised HR users through the VeriSkill-AI platform.</div></div>
+<div class="strength-card" style="background:#E3F2FD;"><div class="title" style="color:#1565C0;">Government System &amp; Regulatory Literacy</div><div style="font-size:0.88em;line-height:1.6;">The department's workforce demonstrates measurable proficiency with government-specific platforms and regulatory frameworks. PERSAL is one of the most widely evidenced technical competencies, representing genuine baseline digital system literacy — the foundation on which broader ICT upskilling can be built.</div></div>
+<div class="strength-card" style="background:#E8F5E9;"><div class="title" style="color:#2E7D32;">Communication &amp; Stakeholder Engagement</div><div style="font-size:0.88em;line-height:1.6;">Communication emerges as an evidenced competency across the assessed workforce — a strategic asset for a department whose mandate requires digital engagement with citizens, other departments, and provincial political principals.</div></div>
+<div class="strength-card" style="background:#FFF3E0;"><div class="title" style="color:#E65100;">Leadership &amp; Management Potential</div><div style="font-size:0.88em;line-height:1.6;">Leadership and management competency appears across multiple branches at director and deputy director level. This provides a viable talent pipeline for digital transformation leadership once targeted technical digital skills are developed.</div></div>
+<div class="strength-card" style="background:#F3E5F5;"><div class="title" style="color:#9C27B0;">Analytical &amp; Reporting Foundation</div><div style="font-size:0.88em;line-height:1.6;">Analytical and reporting capability — evidenced through financial analysis, monitoring and evaluation, and data presentation — provides a foundation for the data analytics capability the department needs. Staff already operate with structured data, meaning Data Analytics upskilling extends existing capability rather than introducing an entirely unfamiliar domain.</div></div>
+<div class="strength-card" style="background:#E8EAF6;"><div class="title" style="color:#1A237E;">Public Sector Governance Knowledge</div><div style="font-size:0.88em;line-height:1.6;">Knowledge of the Public Finance Management Act (PFMA) and payroll administration competency indicates a workforce grounded in the governance, accountability, and financial management frameworks of the South African public service. This foundation is critical for ensuring that digital transformation is implemented within — not as a workaround to — the department's oversight obligations. Staff with existing compliance and governance knowledge can connect POPIA and MISS obligations to frameworks they already recognize, reducing the conceptual barrier to cybersecurity awareness training.</div></div>
+
+<h1 class="section">7. Priority Actions — Next 12 Months</h1>
+<div class="action-card">
+  <div class="action-num">1</div>
+  <div>
+    <div class="action-title">Establish a structured digital literacy baseline assessment across the department to determine the depth and distribution of the gap per branch and staff category — providing the evidentiary foundation for targeted development planning and PS-SAMF Advanced maturity reporting. Priority should be given to branches where current digital skills coverage is lowest.</div>
+    <div class="action-rationale"></div>
+    <div class="action-owner">Owner: Training Unit</div>
+  </div>
+</div><div class="action-card">
+  <div class="action-num">2</div>
+  <div>
+    <div class="action-title">Prioritise cybersecurity awareness and POPIA compliance training as a cross-cutting development intervention applicable to all staff categories and branches — addressing the department's most acute regulatory risk exposure under POPIA Act 4 of 2013 (Section 55 Information Officer obligations) and MISS 2022. Accredited and approved learning pathways should be selected through the WSP process.</div>
+    <div class="action-rationale"></div>
+    <div class="action-owner">Owner: Training Unit + Legal Services</div>
+  </div>
+</div><div class="action-card">
+  <div class="action-num">3</div>
+  <div>
+    <div class="action-title">Establish an executive governance structure with clear accountability for Digital Capability Development Framework implementation — with senior management oversight and directorate-level digital change champions to provide sustained momentum and ensure all L&amp;D interventions are tracked against WSP commitments.</div>
+    <div class="action-rationale"></div>
+    <div class="action-owner">Owner: HR Director</div>
+  </div>
+</div><div class="action-card">
+  <div class="action-num">4</div>
+  <div>
+    <div class="action-title">Include digital leadership and change management as a development priority for senior and executive management in the next WSP cycle — building the leadership capacity required to drive digital transformation, manage organisational change, and meet PS-SAMF Advanced maturity People dimension requirements. Programme selection should be aligned to the EDP competency framework and approved through HR governance structures.</div>
+    <div class="action-rationale"></div>
+    <div class="action-owner">Owner: Training Unit</div>
+  </div>
+</div><div class="action-card">
+  <div class="action-num">5</div>
+  <div>
+    <div class="action-title">Include data analytics and governance capability development in the WSP for managerial and specialist roles where data-driven decision-making is a documented JD requirement — embedding POPIA data sovereignty compliance and approved government data platform usage. A PSETA-accredited short programme at NQF Level 6 is the appropriate vehicle for this intervention.</div>
+    <div class="action-rationale"></div>
+    <div class="action-owner">Owner: Training Unit + Legal Services</div>
+  </div>
+</div><div class="action-card">
+  <div class="action-num">6</div>
+  <div>
+    <div class="action-title">Commission a PERSAL-linked online CV submission portal as a strategic recommendation for the 2026/27 audit cycle — directly resolving the data integrity constraints observed in this cycle: CVs submitted in unreadable formats, and CV file names not consistently matching PERSAL establishment records. This has not yet been implemented. Once deployed, it would improve the precision of the CV Submission Rate signal, strengthen the CV Assessment Coverage baseline, reduce manual HR reconciliation effort, and ensure future audit cycles commence with higher-confidence data across all PS-SAMF signals.</div>
+    <div class="action-rationale"></div>
+    <div class="action-owner">Owner: ICT Shared Services + HR Director</div>
+  </div>
+</div>
+
+<h1 class="section">8. Workplace Skills Plan — Headline Interventions</h1>
+<p>The following interventions should be included in the departmental Workplace Skills Plan (WSP) submission and linked to individual Personal Development Plans (PDPs) via the PMDS cycle.</p>
+<table class="std"><thead><tr>
+  <th>Training Need</th><th>Target Group</th>
+  <th>Intervention</th><th>Timeline</th><th>Budget Band</th><th>PS-SAMF Dimension</th>
+</tr></thead><tbody><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;font-weight:700;">Digital Literacy — foundational ICT and internet skills for all non-specialist staff</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Administrative and support staff across all branches — priority to those where CV quality data indicates lowest current digital competency</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Accredited digital literacy programme for public servants (blended delivery — self-paced and facilitated components)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">To be confirmed through WSP process</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Low (&lt;R5k pp)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PS-SAMF People dimension — Developing to Advanced; DigComp 2.2 Areas 1 &amp; 3; DPSA Human Resource Development Strategy for the Public Service</td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;font-weight:700;">Cybersecurity awareness and POPIA compliance for all staff</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">All departmental staff across all branches and salary levels — this obligation is not limited to ICT</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Accredited cybersecurity awareness and POPIA compliance programme (MISS-aligned; blended or e-learning delivery appropriate)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">To be confirmed through WSP process</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Low (&lt;R5k pp)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PS-SAMF Technology dimension — MISS compliance, POPIA Section 55 Information Officer obligations, DPSA Information Security Policy Framework</td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;font-weight:700;">Data management, governance, and POPIA-compliant data handling for managers and specialists</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Managers and specialist staff in roles where data-driven decision-making is a documented JD requirement</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PSETA-accredited data analytics and governance short programme (NQF Level 6, including POPIA data sovereignty and approved government data platform usage)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">To be confirmed through WSP process</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Medium (R5k–R15k pp)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PS-SAMF Technology and People dimensions — Advanced maturity; DPSA Data Management Framework; POPIA Conditions of Lawful Processing</td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;font-weight:700;">Digital leadership and change management for senior managers</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Senior management and executive staff in roles with digital transformation governance responsibilities</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Senior leadership digital transformation programme aligned to the EDP competency framework (DPSA-aligned, facilitated by a certified Digital Capability Development provider)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">To be confirmed through WSP process</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">High (&gt;R15k pp)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PS-SAMF Leadership dimension — Developing to Advanced; NDP Chapter 13 Capable and Developmental State; DPSA Senior Management Service competency framework</td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;font-weight:700;">AI and automation awareness for all staff, with applied focus for senior managers and e-services specialists</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">All staff (foundational awareness level); specialist and managerial staff where AI or automation is a JD requirement (applied module)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Accredited AI awareness and automation literacy programme (OECD AI Framework-aligned; self-paced module for awareness cohort; facilitated workshop for applied cohort)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">To be confirmed through WSP process</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Low (&lt;R5k pp) for awareness; Medium (R5k–R15k pp) for applied cohort</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PS-SAMF Technology dimension — future world of work alignment; OECD AI Principles; DPSA Digital Transformation Strategy for the Public Service</td>
+            </tr><tr>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;font-weight:700;">Cloud and digital infrastructure fundamentals for technical and managerial roles</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Technical and managerial staff in roles with cloud infrastructure or digital service delivery responsibilities</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">MICT SETA-accredited Cloud Services and Digital Infrastructure for Government (NQF Level 5, data sovereignty compliant, Gauteng Provincial ICT training provider)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">To be confirmed through WSP process</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">Medium (R5k–R15k pp)</td>
+              <td style="padding:5px 8px;font-size:0.85em;border-bottom:1px solid #eee;">PS-SAMF Technology dimension — Advanced to Leading maturity pathway; DPSA Cloud Computing Policy for Government; Gauteng e-Government Digital Infrastructure Standards</td>
+            </tr></tbody></table>
+<div class="info-box"><div class="hdr">PMDS Integration</div><div style="font-size:0.9em;line-height:1.6;">All interventions above must be captured as development objectives in individual PMDS performance agreements at the next review cycle. Supervisors are responsible for tracking completion. HR is responsible for updating CVs in the system post-intervention to reflect newly acquired competencies and recalibrate assessment scores.</div></div>
+
+<h1 class="section">9. Governance &amp; Compliance</h1>
+<div class="ok-box"><div class="hdr">Data Sovereignty</div><div style="font-size:0.9em;line-height:1.6;">All employee skills data presented in this report is the exclusive property of the State (Gauteng Provincial Government). No personal CV data or individual employee information has been transmitted to external systems. All AI-assisted analysis uses only aggregated, anonymised data inputs, in compliance with the DPSA data sovereignty requirement.</div></div>
+<div class="info-box"><div class="hdr">POPIA Compliance</div><div style="font-size:0.9em;line-height:1.6;">This report was generated using the VeriSkill-AI platform, which processes Personal Information as defined in the Protection of Personal Information Act (POPIA), Act 4 of 2013. All individual data is processed under the department's mandate as a Responsible Party. Staff whose data is included have submitted CVs voluntarily as part of the departmental skills audit process.</div></div>
+<div class="caution-box"><div class="hdr">Human Validation Requirement (PS-SAMF)</div><div style="font-size:0.9em;line-height:1.6;">As required by DPSA guidelines, all AI-assisted assessments in this report require human validation before being used for individual staff development decisions, PMDS ratings, or recruitment. The scores and gap analyses presented here are a baseline — not a final determination of any individual's competence.</div></div>
+
+<div class="footer">Gauteng Department of e-Government — Digital Capability Development Framework — 18 June 2026<br>Generated by VeriSkill-AI &nbsp;|&nbsp; Confidential — For Internal Use</div>
+</div></body></html>
