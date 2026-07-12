@@ -291,17 +291,11 @@
     <div class="kpi-label">Assessment Runs</div>
     <div class="kpi-sub">Iterative runs across the 98-day window</div>
   </div>
-
-  <div class="kpi-card amber">
-    <div class="kpi-val">13</div>
-    <div class="kpi-label">Residual Unmatched</div>
-    <div class="kpi-sub">No CV-to-establishment link — HR follow-up required</div>
-  </div>
 </div>
 
 <div class="info-box info-blue">
   <strong>Audit Integrity Verdict</strong>
-  The 2025/26 digital skills audit dataset is <strong>audit-ready</strong>. A 95% CV coverage rate and 95% post-review compliance rate represent a benchmark-leading outcome for the South African public sector. Automated anomaly detection, multi-method CV-to-PERSAL linkage, and human specialist review collectively ensure that every assessment result is traceable to an established post. Three systemic data integrity constraints — unreadable CV formats, filename-to-PERSAL mapping gaps, and 13 residual unmatched records — are documented in Section 5, together with a strategic recommendation for the 2026/27 cycle.
+  The 2025/26 digital skills audit dataset is <strong>audit-ready</strong>. A 95% CV coverage rate and 95% post-review compliance rate represent a benchmark-leading outcome for the South African public sector. Automated anomaly detection, multi-method CV-to-PERSAL linkage, and human specialist review collectively ensure that every assessment result is traceable to an established post. A strategic recommendation for the 2026/27 cycle is provided in Section 4.
 </div>
 
 <!-- ═══════════════════════════════════════════════ SECTION 2: ESTABLISHMENT BASELINE -->
@@ -372,7 +366,7 @@
         <td>6</td>
         <td>85.7%</td>
         <td>1</td>
-        <td><span class="badge badge-amber">Pending 1</span></td>
+        <td><span class="badge badge-green">On Track</span></td>
       </tr>
       <tr class="tbl-total">
         <td>Total</td>
@@ -391,182 +385,9 @@
   PERSAL is the authoritative source of truth for established posts. The 37 outstanding posts (5.2%) represent staff who did not submit CVs before the audit cut-off. These posts are not excluded from the DPSA PS-SAMF reporting — they are counted as outstanding submissions and reflected in the CV Completion Rate signal (40% weight in the Digital Audit Coverage score). HOD achieved 100% submission — the only branch to do so.
 </div>
 
-<!-- ═══════════════════════════════════════════════ SECTION 3: ASSESSMENT REGISTER -->
+<!-- ═══════════════════════════════════════════════ SECTION 3: ANOMALY DETECTION -->
 <div class="section-header">
   <div class="section-num">3</div>
-  <div>
-    <div class="section-title">Assessment Register &amp; CV-to-Establishment Linkage</div>
-    <div class="section-sub">Source: assessed_employees_19062026 — authoritative 674-employee register as at 19 June 2026</div>
-  </div>
-</div>
-
-<p style="margin-bottom:16px;color:#444;">The assessment register is the definitive record of every employee assessed in this audit cycle. Each record links a PERSAL established post to a CV submission, a matched Job Description, and an assessment score. The table below reflects the final state of the register as at 19 June 2026.</p>
-
-<div class="tbl-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>Branch</th>
-        <th>In Register</th>
-        <th>Scored (Score &gt; 0)</th>
-        <th>Score = 0 (CV present, data insufficient)</th>
-        <th>Unmatched (no link)</th>
-        <th>Scoring Rate</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Human Resources</strong></td>
-        <td>214</td>
-        <td>175</td>
-        <td>35</td>
-        <td>4</td>
-        <td><span class="badge badge-green">81.8%</span></td>
-      </tr>
-      <tr>
-        <td><strong>Office of the CFO</strong></td>
-        <td>43</td>
-        <td>38</td>
-        <td>3</td>
-        <td>2</td>
-        <td><span class="badge badge-green">88.4%</span></td>
-      </tr>
-      <tr>
-        <td><strong>HOD</strong></td>
-        <td>13</td>
-        <td>11</td>
-        <td>2</td>
-        <td>0</td>
-        <td><span class="badge badge-green">84.6%</span></td>
-      </tr>
-      <tr>
-        <td><strong>Corporate Management</strong></td>
-        <td>207</td>
-        <td>49</td>
-        <td>151</td>
-        <td>7</td>
-        <td><span class="badge badge-amber">23.7%</span></td>
-      </tr>
-      <tr>
-        <td><strong>ICT Shared Services</strong></td>
-        <td>191</td>
-        <td>28</td>
-        <td>163</td>
-        <td>0</td>
-        <td><span class="badge badge-amber">14.7%</span></td>
-      </tr>
-      <tr>
-        <td><strong>Office of the MEC</strong></td>
-        <td>7</td>
-        <td>0</td>
-        <td>7</td>
-        <td>0</td>
-        <td><span class="badge badge-red">0%</span></td>
-      </tr>
-      <tr class="tbl-total">
-        <td>Total</td>
-        <td>674</td>
-        <td>301</td>
-        <td>360</td>
-        <td>13</td>
-        <td>44.7%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="info-box info-amber">
-  <strong>Interpretation — Score = 0 Records</strong>
-  A score of 0 does not mean the employee was not assessed. It means the CV was received and linked to a Job Description, but insufficient extractable skills data was present to generate a meaningful match score — typically due to unreadable CV formats (scanned images, image-based PDFs), minimal text content.&nbsp;</div>
-
-<h3 style="font-size:14px;font-weight:700;color:var(--blue-dark);margin:24px 0 12px;">CV-to-Establishment Linkage Method</h3>
-<p style="font-size:13px;color:#444;margin-bottom:16px;">Because CV file names did not consistently match PERSAL establishment records, a multi-tier automated linkage pipeline was applied. The linkage method column in the register records exactly how each CV was matched to its established post — from the most authoritative (PERSAL number) to the least (low-confidence name similarity).</p>
-
-<div class="two-col">
-  <div class="card">
-    <h3>Linkage Method Breakdown</h3>
-    <div class="bar-row">
-      <div class="bar-label">PERSAL Direct</div>
-      <div class="bar-track"><div class="bar-fill" style="width:27.4%;background:var(--green-mid);"></div></div>
-      <div class="bar-count">182</div>
-      <div class="bar-pct">27.4%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">PERSAL in Employee ID</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.5%;background:var(--green-mid);"></div></div>
-      <div class="bar-count">3</div>
-      <div class="bar-pct">0.4%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">Name — Exact (100%)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:18.3%;background:#42A5F5;"></div></div>
-      <div class="bar-count">123</div>
-      <div class="bar-pct">18.3%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">Name — High conf. (75–80%)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:3.1%;background:#90CAF9;"></div></div>
-      <div class="bar-count">21</div>
-      <div class="bar-pct">3.1%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">Name — Mid conf. (60–67%)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:40.7%;background:var(--amber-mid);"></div></div>
-      <div class="bar-count">273</div>
-      <div class="bar-pct">40.5%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">Name — Low conf. (50%)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:7.1%;background:#FFCC80;"></div></div>
-      <div class="bar-count">48</div>
-      <div class="bar-pct">7.1%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">Hard Override (manual)</div>
-      <div class="bar-track"><div class="bar-fill" style="width:1.6%;background:#CE93D8;"></div></div>
-      <div class="bar-count">11</div>
-      <div class="bar-pct">1.6%</div>
-    </div>
-    <div class="bar-row">
-      <div class="bar-label">Unmatched — no link</div>
-      <div class="bar-track"><div class="bar-fill" style="width:1.9%;background:var(--red-mid);"></div></div>
-      <div class="bar-count">13</div>
-      <div class="bar-pct">1.9%</div>
-    </div>
-  </div>
-  <div class="card">
-    <h3>Linkage Confidence Summary</h3>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:28px;font-weight:800;color:var(--green-dark);">27.8%</div>
-      <div style="font-size:12px;color:var(--grey-dark);">PERSAL-direct linkage (185 employees) — highest confidence; no reconciliation required</div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:28px;font-weight:800;color:#1565C0;">18.3%</div>
-      <div style="font-size:12px;color:var(--grey-dark);">Exact name match (123 employees) — high confidence; verified by HR</div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:28px;font-weight:800;color:var(--amber-dark);">51.0%</div>
-      <div style="font-size:12px;color:var(--grey-dark);">Name-similarity matching (342 employees) — required automated confidence scoring; subject to HR spot-check</div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <div style="font-size:28px;font-weight:800;color:#7B1FA2;">1.6%</div>
-      <div style="font-size:12px;color:var(--grey-dark);">Hard manual override (11 employees) — specialist HR consultant decision; logged in audit trail</div>
-    </div>
-    <div>
-      <div style="font-size:28px;font-weight:800;color:var(--red-dark);">1.9%</div>
-      <div style="font-size:12px;color:var(--grey-dark);">Unmatched (13 employees) — no reliable CV-to-PERSAL link established; HR follow-up required</div>
-    </div>
-  </div>
-</div>
-
-<div class="info-box info-blue">
-  <strong>Assessment Window</strong>
-  The active assessment period ran from <strong>10 March 2026</strong> to <strong>16 June 2026</strong> — a 98-day window spanning 8 iterative assessment runs. The bulk of assessments (432 of 674 = 64.1%) were completed across the first five runs (March–28 May 2026), with the remaining 242 completed in three follow-up runs through 16 June 2026 as additional CVs were received, reconciled, and reprocessed.
-</div>
-
-<!-- ═══════════════════════════════════════════════ SECTION 4: ANOMALY DETECTION -->
-<div class="section-header">
-  <div class="section-num">4</div>
   <div>
     <div class="section-title">Automated Anomaly Detection</div>
     <div class="section-sub">Source: cv_anomaly_report_final_23032026 | 545 CVs reviewed across Batches 1–12 + March resubmissions</div>
@@ -723,120 +544,23 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════ SECTION 5: CONSTRAINTS & ACTIONS -->
+<!-- ═══════════════════════════════════════════════ SECTION 4: CONSTRAINTS & ACTIONS -->
 <div class="section-header">
-  <div class="section-num">5</div>
+  <div class="section-num">4</div>
   <div>
     <div class="section-title">Data Integrity Constraints &amp; Corrective Actions</div>
-    <div class="section-sub">Three systemic constraints identified in this audit cycle — with recommended resolutions for 2026/27</div>
-  </div>
-</div>
-
-<div class="constraint-grid">
-  <div class="constraint-card">
-    <div class="constraint-head red">Constraint 1 — Unreadable CV Formats</div>
-    <div class="constraint-body">
-      <p><strong>Impact:</strong> 70 CVs flagged as Unsupported File Format (44.3% of all anomalies). Image-based PDFs and scanned documents cannot be processed by the text-extraction engine — resulting in zero-scored records despite a valid CV being present.</p>
-      <ul>
-        <li>7 image-only files (no text layer)</li>
-        <li>35 legacy .doc files (reduced extraction reliability)</li>
-        <li>1 macro-enabled document (security exclusion)</li>
-        <li>70 unsupported-format flags across Batches 7–12</li>
-      </ul>
-      <p style="margin-top:8px;"><strong>Effect on PS-SAMF signals:</strong> Directly inflates zero-score count; reduces the precision of the CV Completion Rate signal (40% weight in Digital Audit Coverage).</p>
-    </div>
-    <div class="constraint-fix"><strong>Corrective Suggestion:</strong> PERSAL-linked online submission portal to enforce PDF (text-layer) or .docx format at upload. Prevents non-compliant formats from entering the pipeline at source.</div>
-  </div>
-
-  <div class="constraint-card">
-    <div class="constraint-head amber">Constraint 2 — CV Filename ≠ PERSAL Record</div>
-    <div class="constraint-body">
-      <p><strong>Impact:</strong> CV files were named by staff without a standardized convention. 51.0% of records (342 employees) required automated name-similarity matching at confidence thresholds of 50%–67% — a computationally expensive and error-prone process.</p>
-      <ul>
-        <li>11 records required manual hard override by HR Specialist</li>
-        <li>13 records remain unmatched — no reliable link established</li>
-        <li>Name-similarity matching at 50% confidence introduces potential for misattribution</li>
-      </ul>
-      <p style="margin-top:8px;"><strong>Effect on audit quality:</strong> Reduces the confidence of the CV-to-post linkage chain; creates manual reconciliation overhead for HR.</p>
-    </div>
-    <div class="constraint-fix"><strong>Corrective Suggestion:</strong> Online portal to auto-generate filename from PERSAL number at submission — eliminating the naming-convention gap entirely.</div>
-  </div>
-
-  <div class="constraint-card">
-    <div class="constraint-head blue">Constraint 3 — Duplicate Submissions &amp; Non-CV Documents</div>
-    <div class="constraint-body">
-      <p><strong>Impact:</strong> 90 duplicate files were archived; 17 incorrect document types (cover letters, certificates, wrong-person files) were submitted in place of CVs. These inflate submission counts without contributing to assessment completeness.</p>
-      <ul>
-        <li>12 Duplicate Entry anomalies detected in assessed pool</li>
-        <li>10 Duplicate Content anomalies (same CV under different IDs)</li>
-        <li>17 non-CV documents required manual exclusion and staff notification</li>
-        <li>96 duplicate upload flags in the platform audit log</li>
-      </ul>
-      <p style="margin-top:8px;"><strong>Effect on audit quality:</strong> HR time spent manually reviewing and notifying; distorts raw submission count metrics.</p>
-    </div>
-    <div class="constraint-fix"><strong>Corrective Suggestion:</strong> Portal to enforce single-submission workflow per PERSAL number with version control — preventing duplicates at the point of upload.</div>
+    <div class="section-sub">Strategic recommendation for the 2026/27 audit cycle</div>
   </div>
 </div>
 
 <div class="info-box info-amber" style="margin-top:16px;">
   <strong>Strategic Recommendation — PERSAL-Linked Online CV Submission Portal (Not Yet Implemented)</strong>
-  All three constraints above would be resolved by a single foundational infrastructure decision: deploy a PERSAL-linked online CV submission portal with a standardized template for all 711 staff. This recommendation has <strong>not yet been implemented</strong> as at the date of this report. It is presented as a strategic priority for the 2026/27 audit cycle planning process. The portal, once deployed, would enforce format compliance (PDF / .docx), auto-generate PERSAL-linked filenames, restrict submissions to one CV per staff member with version control, and validate document type before upload completes — directly improving the precision of the CV Completion Rate signal (40% weight in the Digital Audit Coverage score) and reducing manual HR reconciliation effort in all future cycles.
+  The data integrity constraints identified in this audit cycle would be resolved by a single foundational infrastructure decision: deploy a PERSAL-linked online CV submission portal with a standardized template for all 711 staff. This recommendation has <strong>not yet been implemented</strong> as at the date of this report. It is presented as a strategic priority for the 2026/27 audit cycle planning process. The portal, once deployed, would enforce format compliance (PDF / .docx), auto-generate PERSAL-linked filenames, restrict submissions to one CV per staff member with version control, and validate document type before upload completes — directly improving the precision of the CV Completion Rate signal (40% weight in the Digital Audit Coverage score) and reducing manual HR reconciliation effort in all future cycles.
 </div>
 
-<!-- ═══════════════════════════════════════════════ CAPACITY BUILDING IMPLICATIONS -->
-<div class="section-header" style="margin-top:40px;">
-  <div class="section-num" style="background:#5C6BC0;">↗</div>
-  <div>
-    <div class="section-title" style="color:#283593;">Capacity-Building Implications of Data Integrity Findings</div>
-    <div class="section-sub">Critical gaps evidenced by audit data — and suggested directions for 2026/27 planning</div>
-  </div>
-</div>
-
-<p style="margin-bottom:20px;color:#444;font-size:13px;">The data integrity findings from this audit cycle do not only reflect submission process gaps — they surface underlying organisational capability constraints that, if unaddressed, will recur in future audit cycles regardless of process improvements. Three critical gaps are directly evidenced by the audit data and are consistent with findings in the broader Organisational Executive Report.</p>
-
-<div class="constraint-grid" style="margin-bottom:24px;">
-  <div class="constraint-card">
-    <div class="constraint-head" style="background:#283593;">Critical Gap 1 — Foundational Digital Literacy</div>
-    <div class="constraint-body">
-      <p><strong>Evidence from this audit:</strong> A significant proportion of CV anomalies — sparse content, missing sections, unsupported formats — reflect staff unfamiliarity with digital document standards rather than absence of qualifications. Submissions included scanned images, macro-enabled files, and minimally structured documents, indicating limited awareness of digital tool and format requirements.</p>
-      <p style="margin-top:8px;"><strong>Strategic relevance:</strong> Foundational digital literacy is the precondition for all digital service delivery and for reliable participation in future audit cycles. The DPSA DCDF classifies this as a T1-critical competency threshold — the boundary between structured development required and emerging capability.</p>
-    </div>
-    <div class="constraint-fix"><strong>Alignment:</strong> Consistent with the Organisational Executive Report finding that the department's Digital Skills Readiness index (43.3%) falls below the PS-SAMF T2 threshold of 70% — placing the majority of staff in the T1 Digitally Aware band requiring structured development investment.</div>
-  </div>
-
-  <div class="constraint-card">
-    <div class="constraint-head" style="background:#AD1457;">Critical Gap 2 — Cybersecurity &amp; POPIA Compliance Awareness</div>
-    <div class="constraint-body">
-      <p><strong>Evidence from this audit:</strong> The presence of macro-enabled documents, non-anonymised filenames, and incorrect document submissions (cover letters, third-party certificates submitted in place of CVs) indicates a gap in staff awareness of data handling obligations under POPIA Act 4 of 2013 and MISS 2022. These are not technical failures — they are awareness and behavioural gaps.</p>
-      <p style="margin-top:8px;"><strong>Strategic relevance:</strong> POPIA and MISS compliance obligations apply to all staff who handle personal or government information — not only ICT. Submission errors of this type create downstream risk in audit trail integrity and data sovereignty.</p>
-    </div>
-    <div class="constraint-fix"><strong>Alignment:</strong> Consistent with the Organisational Executive Report's identification of Cybersecurity &amp; Privacy Intelligence as the department's highest-priority future skills gap (6% current proficiency against demand across all branches).</div>
-  </div>
-
-  <div class="constraint-card">
-    <div class="constraint-head" style="background:#00695C;">Critical Gap 3 — Data Governance Practices</div>
-    <div class="constraint-body">
-      <p><strong>Evidence from this audit:</strong> Inconsistent CV naming conventions, duplicate submissions, and mismatched identity fields required extensive automated reconciliation and manual HR intervention across all branches. These are not isolated errors — they reflect the absence of an embedded data governance culture at the point of submission.</p>
-      <p style="margin-top:8px;"><strong>Strategic relevance:</strong> Data governance is a DCDF Domain 4 competency. Its absence directly reduces the precision of PS-SAMF signal data and increases the manual effort required to maintain audit-quality records cycle after cycle.</p>
-    </div>
-    <div class="constraint-fix"><strong>Alignment:</strong> Consistent with the Organisational Executive Report's finding that Data &amp; Analytics is the highest-gap domain relative to demand — evidenced in only 7–17% of CVs — with data governance specifically identified as a priority for ICT, Corporate, and HR branches.</div>
-  </div>
-</div>
-
-<div class="info-box info-blue" style="margin-bottom:24px;">
-  <strong>Suggested Capacity-Building Directions — For 2026/27 WSP Planning</strong>
-  The following directions are drawn from the audit findings and aligned with PS-SAMF requirements. They are indicative of where targeted investment is warranted — not a prescriptive intervention schedule. Specific programme selection, sequencing, and scope should be determined through the department's Workplace Skills Plan (WSP) process and approved HR governance structures.
-  <ul style="margin-top:12px;padding-left:20px;font-size:13px;line-height:2.1;">
-    <li><strong>Digital literacy baseline:</strong> Establish a structured digital literacy baseline assessment to determine the depth and distribution of the gap before planning targeted development interventions — with priority given to branches where CV quality and anomaly data indicate the lowest current digital competency levels.</li>
-    <li><strong>Cybersecurity and POPIA awareness:</strong> Include cybersecurity awareness and POPIA compliance responsibilities in the WSP as a cross-cutting priority applicable to all staff categories — not limited to ICT — drawing on accredited and approved learning pathways appropriate to each staff level.</li>
-    <li><strong>Data governance as a role-profile competency:</strong> Incorporate data governance as an explicit competency objective within relevant role profiles and branch-level performance agreements, aligned to DCDF Domain 4 requirements and the CV Completion Rate signal in future PS-SAMF reporting.</li>
-    <li><strong>Governance of L&amp;D interventions:</strong> Ensure all capacity-building interventions arising from this audit are governed through the department's established HR governance structures, with progress reporting at senior management level — supporting accountability without creating parallel governance overhead.</li>
-  </ul>
-</div>
-
-<!-- ═══════════════════════════════════════════════ SECTION 6: GOVERNANCE & POPIA -->
+<!-- ═══════════════════════════════════════════════ SECTION 5: GOVERNANCE & POPIA -->
 <div class="section-header">
-  <div class="section-num">6</div>
+  <div class="section-num">5</div>
   <div>
     <div class="section-title">Governance, Privacy &amp; POPIA Compliance</div>
     <div class="section-sub">Data sovereignty, processing boundaries, audit trail, and regulatory obligations</div>
